@@ -160,8 +160,8 @@ def main():
 
     for episode in range(EPISODE):
 
-        feature_encoder_scheduler.step(episode)
-        relation_network_scheduler.step(episode)
+        # feature_encoder_scheduler.step(episode)
+        # relation_network_scheduler.step(episode)
 
         # init dataset
         # sample_dataloader is to obtain previous samples for compare
@@ -206,10 +206,11 @@ def main():
 
         feature_encoder_optim.step()
         relation_network_optim.step()
-
+        feature_encoder_scheduler.step(episode)
+        relation_network_scheduler.step(episode)
 
         if (episode+1)%100 == 0:
-                print("episode:",episode+1,"loss",loss.data[0])
+                print("episode:",episode+1,"loss",loss.item())
 
         if episode%5000 == 0:
 
